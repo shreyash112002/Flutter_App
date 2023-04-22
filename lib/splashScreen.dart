@@ -25,9 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       body:Center(child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [Image.asset("assets/images/parking_logo.png")]),)
+        children: [Image.asset("assets/images/Parking_logo.jpg")]),)
     );
   }
 }
-
-
