@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "345944463140",
+    "project_id": "carparking-64787",
+    "storage_bucket": "carparking-64787.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345944463140:android:1c039f9e0b197084e2c5b1",
+        "android_client_info": {
+          "package_name": "com.example.flutterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345944463140-ogug8vp1a3tjlp830dbk6sj5hbiop078.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutterapp",
+            "certificate_hash": "fc1236927a14f7a1b8aac84bb6bc0022c02537e7"
+          }
+        },
+        {
+          "client_id": "345944463140-5l4hviddqqreas65cdv4a8gcgdupff5q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrcRXCMbXdViYcONgm-C1o4YcD8_zCs3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345944463140-5l4hviddqqreas65cdv4a8gcgdupff5q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

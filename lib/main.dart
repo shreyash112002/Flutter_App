@@ -1,12 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/homescreen.dart';
-// import 'package:flutterapp/pages/splashScreen.dart';
+import 'package:flutterapp/splashScreen.dart';
 import 'package:flutterapp/utils/mytheme.dart';
 import 'splashScreen.dart';
 import 'SigninScreen.dart';
 import 'homescreen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -19,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         '/':(context) => SplashScreen(),
-        '/home':(context) => HomePage(),
+        '/home':(context) => HomeScreen(),
         '/signup':(context) => SigninScreen(),
       },
     );

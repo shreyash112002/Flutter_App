@@ -8,10 +8,11 @@ hexStringToColor(String hexColor) {
   return Color(int.parse(hexColor, radix: 16));
 }
 
+
 class MyTheme{
   static const splash = Color(0xFFE81667);
   static const appBarColor = Color(0xFF222539);
-  
+
   static final myDarkTheme = ThemeData(
     primaryColor: splash,
     scaffoldBackgroundColor: appBarColor,
