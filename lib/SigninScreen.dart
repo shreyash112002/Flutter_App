@@ -14,14 +14,22 @@ class _SigninScreenState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            hexStringToColor("CB2B93"),
-            hexStringToColor("9546C4"),
-            hexStringToColor("5E61F4")
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-        ),
+      // body: Container(
+      //   decoration: BoxDecoration(
+      //     gradient: LinearGradient(colors: [
+      //       hexStringToColor("CB2B93"),
+      //       hexStringToColor("9546C4"),
+      //       hexStringToColor("5E61F4")
+      //     ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+      //   ),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: (){
+              Navigator.pushNamed(context, '/home');
+            },
+            child: Text("Sign up"),
+          )
+          ),
       );
   }
 }

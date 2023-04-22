@@ -17,8 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState(){
     super.initState();
     Timer(Duration(seconds: 5),(){
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomePage(),));
-    });
+        Navigator.of(context).pushReplacementNamed('/signup');
+            });
   }
   Widget build(BuildContext context) {
     return Scaffold(

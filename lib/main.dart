@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapp/homescreen.dart';
 // import 'package:flutterapp/pages/splashScreen.dart';
 import 'package:flutterapp/utils/mytheme.dart';
 import 'splashScreen.dart';
 import 'SigninScreen.dart';
+import 'homescreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +17,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: MyTheme.myDarkTheme,
-      debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      routes: {
+        '/':(context) => SplashScreen(),
+        '/home':(context) => HomePage(),
+        '/signup':(context) => SigninScreen(),
+      },
     );
   }
 }
