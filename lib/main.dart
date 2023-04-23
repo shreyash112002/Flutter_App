@@ -9,25 +9,23 @@ import 'homescreen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        '/':(context) => SplashScreen(),
-        '/home':(context) => HomeScreen(),
-        '/signup':(context) => SigninScreen(),
-      },
-    );
-  }
+            return MaterialApp(
+              routes: {
+                '/': (context) => SplashScreen(),
+                '/home': (context) => HomeScreen(),
+                '/signup': (context) => SigninScreen(),
+              },
+            );
+          }
 }
-
 
 // class MyHomePage extends StatefulWidget {
   // const MyHomePage({super.key, required this.title});
