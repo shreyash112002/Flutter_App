@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterapp/SigninScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp/profilepage.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -39,9 +40,19 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: Colors.blue),
         ],
         onTap: (index) {
-          setState(() {
+          switch (index) {
+            case 0 :
             _currentIndex = index;
-          });
+
+          break;
+          case 1:
+          // navigate to settings page
+          Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilePage()),
+        );
+        break;
+          };
         },
       ),
     );
