@@ -10,20 +10,39 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  final tabs = [
+    Center(child: Text('Home')),
+    Center(child: Text('Profile')),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          child: Text("Logout"),
-          onPressed: () {
-            FirebaseAuth.instance.signOut().then((value) {
-              print("Signed Out");
-              Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SigninScreen()));
-            });
-          },
-        ),
+      appBar: AppBar(
+        title: Text('CARPARKING'),
+      ),
+      body: tabs[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        iconSize: 25,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: ('Home'),
+              backgroundColor: Colors.blue),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: ('Profile'),
+              backgroundColor: Colors.blue),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
     );
   }
