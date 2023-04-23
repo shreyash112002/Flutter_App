@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutterapp/SigninScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/profilepage.dart';
+import 'package:flutterapp/reusable_widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CARPARKING'),
+        title: Text('Home'),
       ),
       body: tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -41,18 +42,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         onTap: (index) {
           switch (index) {
-            case 0 :
-            _currentIndex = index;
+            case 0:
+              _currentIndex = index;
 
-          break;
-          case 1:
-          // navigate to settings page
-          Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ProfilePage()),
-        );
-        break;
-          };
+              break;
+            case 1:
+              // navigate to settings page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
+              break;
+          }
+          ;
         },
       ),
     );

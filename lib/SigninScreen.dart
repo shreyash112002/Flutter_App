@@ -19,29 +19,28 @@ class SigninScreen extends StatefulWidget {
   State<SigninScreen> createState() => _SigninScreenState();
 }
 
-
 class _SigninScreenState extends State<SigninScreen> {
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // body: Center(
-        //   child: ElevatedButton(
-        //     onPressed: (){
-        //       Navigator.pushNamed(context, '/home');
-        //     },
-        //     child: Text("Sign up"),
-        //   )
-        //   ),
-        body: Container(
+      // body: Center(
+      //   child: ElevatedButton(
+      //     onPressed: (){
+      //       Navigator.pushNamed(context, '/home');
+      //     },
+      //     child: Text("Sign up"),
+      //   )
+      //   ),
+      body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-          hexStringToColor("CB2B93"),
-          hexStringToColor("9546C4"),
-          hexStringToColor("5E61F4")
+          hexStringToColor("0096FF"),
+          hexStringToColor("89CFF0"),
+          hexStringToColor("F0FFFF")
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: SingleChildScrollView(
           child: Padding(
@@ -82,14 +81,15 @@ class _SigninScreenState extends State<SigninScreen> {
           ),
         ),
       ),
-      );
+    );
   }
-    Row signUpOption() {
+
+  Row signUpOption() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text("Don't have account?",
-            style: TextStyle(color: Colors.white70)),
+            style: TextStyle(color: Colors.black)),
         GestureDetector(
           onTap: () {
             Navigator.push(context,
@@ -97,7 +97,7 @@ class _SigninScreenState extends State<SigninScreen> {
           },
           child: const Text(
             " Sign Up",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         )
       ],
@@ -112,7 +112,7 @@ class _SigninScreenState extends State<SigninScreen> {
       child: TextButton(
         child: const Text(
           "Forgot Password?",
-          style: TextStyle(color: Colors.white70),
+          style: TextStyle(color: Colors.black),
           textAlign: TextAlign.right,
         ),
         onPressed: () => Navigator.push(
@@ -121,4 +121,3 @@ class _SigninScreenState extends State<SigninScreen> {
     );
   }
 }
-
