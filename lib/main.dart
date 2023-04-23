@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/homescreen.dart';
 import 'package:flutterapp/splashScreen.dart';
-import 'package:flutterapp/utils/mytheme.dart';
 import 'splashScreen.dart';
 import 'SigninScreen.dart';
 import 'homescreen.dart';
