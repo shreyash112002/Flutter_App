@@ -12,8 +12,6 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      
-    );
+    return Drawer();
   }
 }
