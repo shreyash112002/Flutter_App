@@ -7,6 +7,8 @@ import 'package:flutterapp/controller/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:core'; // add this import statement
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import 'homescreen.dart';
 import 'reusable_widgets.dart';
@@ -103,9 +105,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           'password': _passwordTextController.text
                         })
                         .then((value) =>
-                            print("User information stored in Firestore"))
-                        .catchError((error) =>
-                            print("Failed to store user information: $error"));
+            Get.snackbar("Succesfull", "Your Account has been created.",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black.withOpacity(0.1),
+            colorText: Colors.white))
+        .catchError((error) => 
+            Get.snackbar("Error","Failed to create your account.",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black.withOpacity(0.1),
+            colorText: Colors.white));
 
                     Navigator.push(
                         context,

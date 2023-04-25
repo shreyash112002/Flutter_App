@@ -27,22 +27,31 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  void _deleteUser(String userId) {
+    FirebaseFirestore.instance.collection('users1').doc(userId).delete();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Profile'),
-        ),
-        body: _isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : ListView.builder(
-                itemCount: _users.length,
-                itemBuilder: (context, index) {
-                  final user = _users[index];
-                  return ListTile(
-                    title: Text(user['username']),
-                  );
-                },
-              ));
+      appBar: AppBar(
+        title: const Text('Profile'),
+      ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: _users.length,
+              itemBuilder: (context, index) {
+                final user = _users[index];
+                return ListTile(
+                  title: Text(user['username']),
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () => _deleteUser(user.id),
+                  ),
+                );
+              },
+            ),
+    );
   }
 }
