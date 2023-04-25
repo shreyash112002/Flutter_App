@@ -16,7 +16,6 @@ List listResponse = ['data'];
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-  
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -37,7 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
   //   }
   // }
 
-  final Url="https://script.googleusercontent.com/macros/echo?user_content_key=CnyZzTz7l7bXfFX1VRg61md9UX1H3oR8DQ7uzJ0uDnAZm6Ey2y9WA24ip9WMxnRAQVL9Baf3UMGAdEvxAb9SRglPL04gcRMfm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnF4W0jjeCGoVqtV2SVh4_DWyutOJbIG1XY5GbjlsRWc-l007Hrvmdhz_sbxKREBxpH6V-vOv-Zl3j7IRKlfVv-om28kck3SSM9z9Jw9Md8uu&lib=MxUoWSxTNx4Hk4n3l8SvlMA9o7N4CQEWp";
+  final Url =
+      "https://script.googleusercontent.com/macros/echo?user_content_key=CnyZzTz7l7bXfFX1VRg61md9UX1H3oR8DQ7uzJ0uDnAZm6Ey2y9WA24ip9WMxnRAQVL9Baf3UMGAdEvxAb9SRglPL04gcRMfm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnF4W0jjeCGoVqtV2SVh4_DWyutOJbIG1XY5GbjlsRWc-l007Hrvmdhz_sbxKREBxpH6V-vOv-Zl3j7IRKlfVv-om28kck3SSM9z9Jw9Md8uu&lib=MxUoWSxTNx4Hk4n3l8SvlMA9o7N4CQEWp";
 
   List<Data> _dataList = [];
   bool _isLoading = true;
@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       drawer: NavBar(),
       appBar: AppBar(
-        title: Text('Data Cards'),
+        title: Text('Home'),
       ),
       body: _isLoading
           ? _buildShimmerEffect()
