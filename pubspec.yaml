@@ -68,6 +68,8 @@ flutter:
   assets:
     - assets/images/
     - assets/Parking_logo.jpg
+    - assets/navimage.png
+    - assets/images/navimage.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
