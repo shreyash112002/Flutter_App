@@ -1,16 +1,3 @@
-# flutterapp
+# Car Parking System
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Car owners in urban areas often struggle to find available parking spots due to traditional large parking management systems that rely on manual monitoring and enforcement. This lack of information about parking availability can result in frustration for drivers, and parking lot owners can lose revenue as a result.Our app offers a solution by allowing parking managers to visualize previous data and future predictions of parking slot occupancy. With this information, managers can better manage parking resources and provide drivers with accurate information on available spots, reducing frustration and maximizing revenue
