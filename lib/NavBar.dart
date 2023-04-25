@@ -27,12 +27,11 @@ class _NavBarState extends State<NavBar> {
       child: ListView(children: [
         UserAccountsDrawerHeader(
           currentAccountPicture: CircleAvatar(
-              backgroundImage: AssetImage(
-                  "assets/images/user.png")),
+              backgroundImage: AssetImage("assets/images/user.png")),
           decoration: const BoxDecoration(
             image: DecorationImage(
-               image: AssetImage("assets/images/navimage.png"),
-               fit: BoxFit.cover,
+              image: AssetImage("assets/images/navimage.png"),
+              fit: BoxFit.cover,
             ),
           ),
           // accountName: Text("."),
@@ -46,13 +45,13 @@ class _NavBarState extends State<NavBar> {
             Navigator.of(context).pushNamed("/profile");
           },
         ),
-        ListTile(
-          leading: Icon(Icons.dashboard),
-          title: Text("Dashboard"),
-          onTap: () {
-            Navigator.of(context).pushNamed("/home");
-          },
-        ),
+        // ListTile(
+        //   leading: Icon(Icons.dashboard),
+        //   title: Text("Dashboard"),
+        //   onTap: () {
+        //     Navigator.of(context).pushNamed("/home");
+        //   },
+        // ),
         // ListTile(
         //   leading: Icon(Icons.info),
         //   title: Text("About us"),
