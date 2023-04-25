@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutterapp/SigninScreen.dart';
+import 'package:flutterapp/controller/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:core'; // add this import statement
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'homescreen.dart';
 import 'reusable_widgets.dart';
@@ -16,9 +20,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _userNameTextController = TextEditingController();
+  final _userNameTextController = TextEditingController();
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+  final _nameTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +68,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 20,
                 ),
+                // firebaseUIButton(context, "Sign Up", () {
+                //   FirebaseAuth.instance
+                //       .createUserWithEmailAndPassword(
+                //           email: _emailTextController.text,
+                //           password: _passwordTextController.text)
+                //       .then((value) {
+                //     print("Created New Account");
+                //     Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => SigninScreen()));
+                //   }).onError((error, stackTrace) {
+                //     print("Error ${error.toString()}");
+                //   });
+                // })
                 firebaseUIButton(context, "Sign Up", () {
                   FirebaseAuth.instance
                       .createUserWithEmailAndPassword(
@@ -70,6 +90,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           password: _passwordTextController.text)
                       .then((value) {
                     print("Created New Account");
+
+                    // create a new document in Firestore with the user's information
+                    FirebaseFirestore.instance
+                        .collection(
+                            'users1') // create a new collection named 'users'
+                        .doc(value.user!
+                            .uid) // create a new document with the user's UID
+                        .set({
+                          'username': _userNameTextController.text,
+                          'email': _emailTextController.text,
+                          'password': _passwordTextController.text
+                        })
+                        .then((value) =>
+                            print("User information stored in Firestore"))
+                        .catchError((error) =>
+                            print("Failed to store user information: $error"));
+
                     Navigator.push(
                         context,
                         MaterialPageRoute(

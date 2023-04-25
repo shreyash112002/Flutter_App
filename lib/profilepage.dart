@@ -1,29 +1,48 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutterapp/homescreen.dart';
-import 'package:flutterapp/reusable_widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  int _currentIndex = 1;
+  List<DocumentSnapshot> _users = [];
+  bool _isLoading = true;
 
-  final tabs = [
-    Center(child: Text('Home')),
-    Center(child: Text('Profile')),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection('users1')
+        .snapshots()
+        .listen((snapshot) {
+      setState(() {
+        _users = snapshot.docs;
+        _isLoading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
-    );
+        appBar: AppBar(
+          title: const Text('Profile'),
+        ),
+        body: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                itemCount: _users.length,
+                itemBuilder: (context, index) {
+                  final user = _users[index];
+                  return ListTile(
+                    title: Text(user['username']),
+                  );
+                },
+              ));
   }
 }
