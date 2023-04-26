@@ -6,8 +6,7 @@ Car owners in urban areas often struggle to find available parking spots due to 
 
 | Exp No. | Exp name | Details| Link|
 | --- | --- | --- | --- |
-| 001 | First Flutter App | Making a app in Flutter using scaffold layout, widget hierarchy, and
-diverse widgets such as Text, TextStyle, Font, Image, Assets, Icons, Padding, and Center, among
+| 001 | First Flutter App | Making a app in Flutter using scaffold layout, widget hierarchy and diverse widgets such as Text, TextStyle, Font, Image, Assets, Icons, Padding, and Center, among
 others. | [Link]https://github.com/shreyash112002/Flutter_App/blob/main/lib/homescreen.dart |
 | 002 | Page App (Stateless) | Showing a page in the app that uses Stateless Widget | [Link]https://github.com/shreyash112002/Flutter_App/blob/main/lib/main.dart |
 | 003 | Profile Page App (Stateful) | Showing a page in the app that uses Stateful widget. In the profile page we get data from Fire store  | [Link]https://github.com/shreyash112002/Flutter_App/blob/main/lib/profilepage.dart |
