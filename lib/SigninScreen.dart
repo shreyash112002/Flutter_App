@@ -1,9 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_signin/reusable_widgets/reusable_widget.dart';
-// import 'package:firebase_signin/screens/home_screen.dart';
-// import 'package:firebase_signin/screens/reset_password.dart';
-// import 'package:firebase_signin/screens/signup_screen.dart';
-// import 'package:firebase_signin/utils/mytheme.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutterapp/utils/mytheme.dart';
 import 'homescreen.dart';
