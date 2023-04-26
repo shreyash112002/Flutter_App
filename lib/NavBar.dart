@@ -45,6 +45,13 @@ class _NavBarState extends State<NavBar> {
             Navigator.of(context).pushNamed("/profile");
           },
         ),
+        ListTile(
+          leading: Icon(Icons.logout),
+          title: Text("Logout"),
+          onTap: () {
+            Navigator.of(context).pushNamed("/signup");
+          },
+        ),
         // ListTile(
         //   leading: Icon(Icons.dashboard),
         //   title: Text("Dashboard"),
