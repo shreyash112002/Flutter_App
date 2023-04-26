@@ -2,7 +2,7 @@
 
 Car owners in urban areas often struggle to find available parking spots due to traditional large parking management systems that rely on manual monitoring and enforcement. This lack of information about parking availability can result in frustration for drivers, and parking lot owners can lose revenue as a result.Our app offers a solution by allowing parking managers to visualize previous data and future predictions of parking slot occupancy. With this information, managers can better manage parking resources and provide drivers with accurate information on available spots, reducing frustration and maximizing revenue
 
-##Summary
+## Summary
 
 | Exp No. | Exp name | Details| Link|
 | --- | --- | --- | --- |
