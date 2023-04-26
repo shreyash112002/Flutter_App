@@ -26,7 +26,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
   final _nameTextController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,13 +70,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-
+                // firebaseUIButton(context, "Sign Up", () {
+                //   FirebaseAuth.instance
+                //       .createUserWithEmailAndPassword(
+                //           email: _emailTextController.text,
+                //           password: _passwordTextController.text)
+                //       .then((value) {
+                //     print("Created New Account");
+                //     Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => SigninScreen()));
+                //   }).onError((error, stackTrace) {
+                //     print("Error ${error.toString()}");
+                //   });
+                // })
                 firebaseUIButton(context, "Sign Up", () {
-                  try {
-                    
-                  } catch (e) {
-                    
-                  }
                   FirebaseAuth.instance
                       .createUserWithEmailAndPassword(
                           email: _emailTextController.text,
@@ -96,22 +104,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           'email': _emailTextController.text,
                           'password': _passwordTextController.text
                         })
-                        .then((value) => Get.snackbar(
-                            "Succesfull", "Your Account has been created.",
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.black.withOpacity(0.1),
-                            colorText: Colors.white))
-                        .catchError((error) => Get.snackbar(
-                            "Error", "Failed to create your account.",
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.black.withOpacity(0.1),
-                            colorText: Colors.white));
+                        .then((value) =>
+            Get.snackbar("Succesfull", "Your Account has been created.",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black.withOpacity(0.1),
+            colorText: Colors.white))
+        .catchError((error) => 
+            Get.snackbar("Error","Failed to create your account.",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.black.withOpacity(0.1),
+            colorText: Colors.white));
 
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => SigninScreen()));
-                  }).onError((error, stackTrace) => null);
+                  }).onError((error, stackTrace) {
+                    print("Error ${error.toString()}");
+                  });
                 })
               ],
             ),

@@ -33,7 +33,6 @@ dependencies:
   firebase_auth: ^4.4.2
   firebase_core: ^2.10.0
   shimmer: ^2.0.0
-  fluttertoast: ^8.2.1
 
 
   # The following adds the Cupertino Icons font to your application.

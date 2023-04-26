@@ -22,8 +22,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // Future apicall()async{
+  //   http.Response response;
+  //   response= await http.get(Uri.parse("https://script.googleusercontent.com/macros/echo?user_content_key=Ff4PESC-iXtVr9OsRg5R9d1pNDQi9pJMLJ8DO0RE6mgc2i4mN9kSvbTmVzVREB9urZWFTJxJzrewpOuxQTNZqGvuTngthLHtm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnPveZDlJ_AsjVJCY6axLhPTyT107DOA6BeV8lpw_FsjPFjpp8noYC4ljtLZPJIzijjJM0SxjCYprq9OmLICGGxEjzvIRtMuI3tz9Jw9Md8uu&lib=MxUoWSxTNx4Hk4n3l8SvlMA9o7N4CQEWp"));
+  //   if(response.statusCode==200){
+  //     setState(() {
+  //       // stringResponse=response.body;
+  //       mapResponse=json.decode(response.body);
+  //       listResponse=mapResponse['data'];
+  //       print(listResponse[0]);
+
+  //     });
+  //   }
+  // }
+
   final Url =
-      "https://script.googleusercontent.com/macros/echo?user_content_key=Pn-dwbHsMT3f-x1_26_3_f1lydgzOmXcOXesFoD4lBDadOEULCIemuUBc6mkhAmyuHCcEDhiOoeTbcyNIHyEsxKWNeVgDMmEm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnMtUSWg1paiVDh9EW5nXY8zm4AFvJpOHFj4SWKHrcdAAoRpOB38l0Sg7lCZ91yv-_0KYDCDEEvTuD2LEinhUgzbVx_cknGA9Xdz9Jw9Md8uu&lib=MxUoWSxTNx4Hk4n3l8SvlMA9o7N4CQEWp";
+      "https://script.googleusercontent.com/macros/echo?user_content_key=CnyZzTz7l7bXfFX1VRg61md9UX1H3oR8DQ7uzJ0uDnAZm6Ey2y9WA24ip9WMxnRAQVL9Baf3UMGAdEvxAb9SRglPL04gcRMfm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnF4W0jjeCGoVqtV2SVh4_DWyutOJbIG1XY5GbjlsRWc-l007Hrvmdhz_sbxKREBxpH6V-vOv-Zl3j7IRKlfVv-om28kck3SSM9z9Jw9Md8uu&lib=MxUoWSxTNx4Hk4n3l8SvlMA9o7N4CQEWp";
 
   List<Data> _dataList = [];
   bool _isLoading = true;
@@ -164,8 +178,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 );
+
+                //  return Card(
+                //       child: ListTile(
+                //         title: Text('Date and Time: ${data.dateAndTime}'),
+                //         subtitle: Column(
+                //           crossAxisAlignment: CrossAxisAlignment.start,
+                //           children: [
+                //             Text('Total: ${data.total}'),
+                //             Text('Occupied: ${data.occupied}'),
+                //           ],
+                //         ),
+                //       ),
+                //     );
               },
             ),
+
+      // body: ListView.builder(
+      //   itemCount: _dataList.length,
+      //   itemBuilder: (context, index) {
+      //     final data = _dataList[index];
+      //     return Card(
+      //       child: ListTile(
+      //         title: Text('Date and Time: ${data.dateAndTime}'),
+      //         subtitle: Column(
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           children: [
+      //             Text('Total: ${data.total}'),
+      //             Text('Occupied: ${data.occupied}'),
+      //           ],
+      //         ),
+      //       ),
+      //     );
+      //   },
+      // ),
     );
   }
 }
