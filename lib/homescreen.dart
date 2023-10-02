@@ -1,18 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutterapp/SigninScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/profilepage.dart';
-import 'package:flutterapp/reusable_widgets.dart';
-import 'package:flutterapp/NavBar.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shimmer/shimmer.dart';
 
-String stringResponse = "";
-Map mapResponse = {'data'} as Map;
-Map dataResponse = {'data'} as Map;
-List listResponse = ['data'];
+void main() {
+  runApp(MaterialApp(
+    home: HomeScreen(),
+  ));
+}
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -22,36 +18,47 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Future apicall()async{
-  //   http.Response response;
-  //   response= await http.get(Uri.parse("https://script.googleusercontent.com/macros/echo?user_content_key=Ff4PESC-iXtVr9OsRg5R9d1pNDQi9pJMLJ8DO0RE6mgc2i4mN9kSvbTmVzVREB9urZWFTJxJzrewpOuxQTNZqGvuTngthLHtm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnPveZDlJ_AsjVJCY6axLhPTyT107DOA6BeV8lpw_FsjPFjpp8noYC4ljtLZPJIzijjJM0SxjCYprq9OmLICGGxEjzvIRtMuI3tz9Jw9Md8uu&lib=MxUoWSxTNx4Hk4n3l8SvlMA9o7N4CQEWp"));
-  //   if(response.statusCode==200){
-  //     setState(() {
-  //       // stringResponse=response.body;
-  //       mapResponse=json.decode(response.body);
-  //       listResponse=mapResponse['data'];
-  //       print(listResponse[0]);
-
-  //     });
-  //   }
-  // }
-
-  final Url =
-      "https://script.googleusercontent.com/macros/echo?user_content_key=CnyZzTz7l7bXfFX1VRg61md9UX1H3oR8DQ7uzJ0uDnAZm6Ey2y9WA24ip9WMxnRAQVL9Baf3UMGAdEvxAb9SRglPL04gcRMfm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnF4W0jjeCGoVqtV2SVh4_DWyutOJbIG1XY5GbjlsRWc-l007Hrvmdhz_sbxKREBxpH6V-vOv-Zl3j7IRKlfVv-om28kck3SSM9z9Jw9Md8uu&lib=MxUoWSxTNx4Hk4n3l8SvlMA9o7N4CQEWp";
+  final Url = "https://api.thingspeak.com/channels/2257018/feeds.json?results=2";
 
   List<Data> _dataList = [];
   bool _isLoading = true;
+
   Future<void> _getData() async {
     setState(() {
       _isLoading = true;
     });
     final response = await http.get(Uri.parse(Url));
     if (response.statusCode == 200) {
-      setState(() {
-        _dataList = List<Data>.from(
-            json.decode(response.body)['data'].map((x) => Data.fromJson(x)));
-        _isLoading = false;
-      });
+      final decodedData = json.decode(response.body);
+      if (decodedData['feeds'] != null) {
+        setState(() {
+          _dataList = List<Data>.from(
+            decodedData['feeds'].map((x) => Data.fromJson(x)),
+          );
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Feeds are null in the response.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
     } else {
       throw Exception('Failed to fetch data');
     }
@@ -72,21 +79,32 @@ class _HomeScreenState extends State<HomeScreen> {
         itemCount: 12,
         itemBuilder: (context, index) {
           return Card(
-            child: ListTile(
-              leading: CircleAvatar(
-                radius: 30,
-                backgroundColor: Colors.grey,
-              ),
-              title: SizedBox(
-                height: 20,
-                child: Container(
-                  color: Colors.grey,
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: GestureDetector(
+              onTap: () {
+                if (_dataList.isNotEmpty && _dataList[index].field1 == 1) {
+                  _navigateToDetailsScreen(_dataList[index]);
+                }
+              },
+              child: ListTile(
+                leading: CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.grey,
                 ),
-              ),
-              subtitle: SizedBox(
-                height: 16,
-                child: Container(
-                  color: Colors.grey,
+                title: SizedBox(
+                  height: 20,
+                  child: Container(
+                    color: Colors.grey,
+                  ),
+                ),
+                subtitle: SizedBox(
+                  height: 16,
+                  child: Container(
+                    color: Colors.grey,
+                  ),
                 ),
               ),
             ),
@@ -96,9 +114,18 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  void _navigateToDetailsScreen(Data data) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailsScreen(data: data),
+      ),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavBar(),
       appBar: AppBar(
         title: Text('Home'),
       ),
@@ -108,128 +135,137 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: _dataList.length,
               itemBuilder: (context, index) {
                 final data = _dataList[index];
+                String status = data.field1 == 1 ? 'Empty' : 'Occupied';
                 return Card(
                   elevation: 4,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Date and Time',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                  child: GestureDetector(
+                    onTap: () {
+                      if (data.field1 == 1) {
+                        _navigateToDetailsScreen(data);
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Created At',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          '${data.dateAndTime}',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
+                          SizedBox(height: 8),
+                          Text(
+                            '${data.createdAt}',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey[600],
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Total',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey[600],
-                              ),
+                          SizedBox(height: 16),
+                          Text(
+                            'Entry ID',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
-                            Text(
-                              '${data.total}',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey[800],
-                              ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            '${data.entryId}',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey[800],
                             ),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Occupied',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey[600],
-                              ),
+                          ),
+                          SizedBox(height: 16),
+                          Text(
+                            'Field 1',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
-                            Text(
-                              '${data.occupied}',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey[800],
-                              ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            status,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey[800],
                             ),
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
-
-                //  return Card(
-                //       child: ListTile(
-                //         title: Text('Date and Time: ${data.dateAndTime}'),
-                //         subtitle: Column(
-                //           crossAxisAlignment: CrossAxisAlignment.start,
-                //           children: [
-                //             Text('Total: ${data.total}'),
-                //             Text('Occupied: ${data.occupied}'),
-                //           ],
-                //         ),
-                //       ),
-                //     );
               },
             ),
-
-      // body: ListView.builder(
-      //   itemCount: _dataList.length,
-      //   itemBuilder: (context, index) {
-      //     final data = _dataList[index];
-      //     return Card(
-      //       child: ListTile(
-      //         title: Text('Date and Time: ${data.dateAndTime}'),
-      //         subtitle: Column(
-      //           crossAxisAlignment: CrossAxisAlignment.start,
-      //           children: [
-      //             Text('Total: ${data.total}'),
-      //             Text('Occupied: ${data.occupied}'),
-      //           ],
-      //         ),
-      //       ),
-      //     );
-      //   },
-      // ),
     );
   }
 }
 
-// Center(child: Text(stringResponse.toString())),
 class Data {
-  final DateTime dateAndTime;
-  final int total;
-  final int occupied;
+  final DateTime createdAt;
+  final int entryId;
+  final int field1;
 
-  Data(
-      {required this.dateAndTime, required this.total, required this.occupied});
+  Data({
+    required this.createdAt,
+    required this.entryId,
+    required this.field1,
+  });
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
-      dateAndTime: DateTime.parse(json['Date And Time']),
-      total: json['Total'],
-      occupied: json['Occupied'],
+      createdAt: DateTime.parse(json['created_at']),
+      entryId: json['entry_id'],
+      field1: int.parse(json['field1']),
+    );
+  }
+}
+
+class DetailsScreen extends StatelessWidget {
+  final Data data;
+
+  DetailsScreen({required this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Details'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/qrcode.jpeg', // Change the path to your image
+              width: 500, // Adjust the image width as needed
+              height: 500, // Adjust the image height as needed
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Add logic to perform payment here
+                // Close the app
+                SystemNavigator.pop();
+              },
+              child: Text('DONE'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
