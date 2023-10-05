@@ -1,7 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/homescreen.dart';
-import 'package:flutterapp/profilepage.dart';
+import 'package:flutterapp/ProfilePage.dart';
 import 'package:flutterapp/splashScreen.dart';
 import 'splashScreen.dart';
 import 'SigninScreen.dart';
@@ -24,7 +26,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashScreen(),
         '/home': (context) => HomeScreen(),
         '/signup': (context) => SigninScreen(),
-        '/profile': (context) => ProfilePage(),
       },
     );
   }

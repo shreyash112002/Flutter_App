@@ -1,57 +1,72 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
-
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
+void main() {
+  runApp(ProfilePage());
 }
 
-class _ProfilePageState extends State<ProfilePage> {
-  List<DocumentSnapshot> _users = [];
-  bool _isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    FirebaseFirestore.instance
-        .collection('users1')
-        .snapshots()
-        .listen((snapshot) {
-      setState(() {
-        _users = snapshot.docs;
-        _isLoading = false;
-      });
-    });
-  }
-
-  void _deleteUser(String userId) {
-    FirebaseFirestore.instance.collection('users1').doc(userId).delete();
-  }
-
+class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: _users.length,
-              itemBuilder: (context, index) {
-                final user = _users[index];
-                return ListTile(
-                  title: Text(user['username']),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () => _deleteUser(user.id),
-                  ),
-                );
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Profile Page'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () {
+                // Navigate to the home page here
+                Navigator.of(context).pop(); // This pops the current page and goes back to the previous page (assumes home is the previous page)
               },
             ),
+          ],
+        ),
+        body: ProfileBody(),
+      ),
+    );
+  }
+}
+
+class ProfileBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          CircleAvatar(
+            radius: 80.0,
+            backgroundImage: AssetImage('assets/profile_image.jpg'), // Replace with your image path
+          ),
+          SizedBox(height: 20.0),
+          _buildProfileInfoItem('Email', 'john.doe@example.com'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfileInfoItem(String title, String value) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            title + ': ',
+            style: TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 16.0,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

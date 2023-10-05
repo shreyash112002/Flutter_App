@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shimmer/shimmer.dart';
+import 'profilepage.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -123,11 +124,31 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // Add this function to navigate to the profile screen
+  void _navigateToProfileScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProfilePage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        automaticallyImplyLeading: false, // Add this line
+        actions: [
+          IconButton(
+            icon: Icon(Icons.person), // You can change the icon as needed
+            onPressed: () {
+              // Add logic to navigate to the profile page
+              _navigateToProfileScreen();
+            },
+          ),
+        ],
       ),
       body: _isLoading
           ? _buildShimmerEffect()
@@ -263,6 +284,28 @@ class DetailsScreen extends StatelessWidget {
               },
               child: Text('DONE'),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Add your profile information and UI elements here
+            Text('Your Profile'),
+            // Example: Text('Username: John Doe'),
+            // Example: Text('Email: john@example.com'),
           ],
         ),
       ),
