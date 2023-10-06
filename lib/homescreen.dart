@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final Url = "https://api.thingspeak.com/channels/2257018/feeds.json?results=2";
+  final Url = "https://api.thingspeak.com/channels/2257018/feeds.json?results=10";
 
   List<Data> _dataList = [];
   bool _isLoading = true;
